@@ -7,7 +7,14 @@
         <router-link to="/dashboard"><i class="fas fa-user"></i></router-link>
       </nav>
     </header>
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
+    <div class="footer">
+      <a href="https://github.com/BYUCS260/photo-bomb-jcubby86">
+        <h5>View GitHub Repository here</h5>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -63,5 +70,30 @@ h2 {
 
 .pure-button-primary {
   background-color: #277E8E;
+}
+
+.footer{
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #e74c3c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid #277E8E 5px;
+    margin-left: -200px;
+}
+.footer a{
+    color: #fff;
+    text-decoration: none;
+    margin-top: 10px;
+}
+.footer a:hover{
+    text-decoration: underline;
+}
+
+.content {
+  margin-bottom: 50px;
 }
 </style>

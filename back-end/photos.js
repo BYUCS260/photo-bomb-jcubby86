@@ -89,9 +89,6 @@ router.get("/:id", async (req, res) => {
   try {
     let photo = await Photo.findOne({
       _id: req.params.id
-    }
-    ).sort({
-      created: -1
     }).populate('user');
     return res.send(photo);
   } catch (error) {
