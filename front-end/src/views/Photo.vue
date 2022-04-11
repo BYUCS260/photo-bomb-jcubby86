@@ -9,6 +9,7 @@
       </div>
       <p class="photoDate">{{ formatDate(photo.created) }}</p>
       <img :src="photo.path" />
+      <h2>{{ photo.description }}</h2>
     </div>
     <div class="comments">
       <div v-if="comments.length !== 0">
@@ -18,20 +19,20 @@
           v-for="comment in comments"
           v-bind:key="comment._id"
         >
-          <p>
-            {{ comment.user.firstName }} {{ comment.user.lastName }}
-          </p>
-          <p>{{ formatDate(comment.created) }}</p>
+          <h4>
+            {{ comment.user.firstName }} {{ comment.user.lastName }} -
+            {{ formatDate(comment.created) }}
+          </h4>
           <p>{{ comment.content }}</p>
         </div>
       </div>
       <p v-else>No comments yet</p>
       <div v-if="user">
         <h2>Add a comment</h2>
-        <textarea v-model="content" />
-        <button type="button" @click="upload" class="pure-button pure-button-primary right">
-          Upload
-        </button>
+        <div class="inputs">
+          <textarea v-model="content" />
+          <button type="button" @click="upload">Upload</button>
+        </div>
       </div>
     </div>
   </div>
@@ -94,14 +95,14 @@ export default {
     },
     async upload() {
       try {
-        await axios.post('/api/comments/' + this.id, {
-          content: this.content
+        await axios.post("/api/comments/" + this.id, {
+          content: this.content,
         });
         this.getComments();
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
 };
 </script>
@@ -133,7 +134,8 @@ p {
   box-sizing: inherit;
 }
 
-.image, .comments {
+.image,
+.comments {
   margin: 0 0 1.5em;
   display: inline-block;
   width: 100%;
@@ -145,11 +147,40 @@ p {
   width: 100%;
 }
 
-
 .content {
   padding-top: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.comments {
+  margin-top: 20px;
+}
+
+.comment {
+  margin: 5px;
+  padding: 2px;
+  border-top: 2px solid lightgray;
+  color: black;
+}
+
+.comment h4 {
+  margin: 2px 0px;
+}
+
+textarea {
+  width: 80%;
+}
+
+button {
+  background-color: #277e8e;
+  width: 10%;
+  color: white;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-around;
 }
 </style>
