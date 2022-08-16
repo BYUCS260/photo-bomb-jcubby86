@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // connect to the mongodb database
-mongoose.connect('mongodb://localhost:27017/photobomb', {
+mongoose.connect('mongodb://172.17.0.1:27017/photobomb', {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });
@@ -41,4 +41,5 @@ app.use("/api/photos", photos.routes);
 const comments = require("./comments.js");
 app.use("/api/comments", comments.routes);
 
-app.listen(3002, () => console.log('Server listening on port 3002!'));
+app.use(express.static('../front-end/dist/'));
+app.listen(3000, () => console.log('Server listening on port 3000!'));
